@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-const App = (): JSX.Element => {
-  return <h1>Webpack React TS Starter </h1>;
-};
+import App from '../src/components/App';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { reducers } from './reducers';
 
 const root = document.getElementById('app-root');
+const store = createStore(reducers, applyMiddleware(thunk));
 
-ReactDOM.render(<App />, root);
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  root
+);
 
 export default App;
